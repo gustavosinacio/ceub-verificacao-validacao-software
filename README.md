@@ -1,5 +1,9 @@
 # Verificação e validação de Software
 
+**Autor**: Gustavo S. Inácio
+
+**Disciplina**: Verificação e validação de software
+
 ## Introdução
 
 Neste relatório, vamos apresentar os resultados da criação de testes unitários para uma calculadora. Todo o código deste trabalho, incluindo o código testado e seus testes estarão disponíveis [neste repositório do github](https://github.com/gustavosinacio/ceub-verificacao-validacao-software). Os testes foram criados com o JUnit 4.13.2 para testar o seguinte código:
