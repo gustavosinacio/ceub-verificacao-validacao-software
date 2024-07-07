@@ -33,6 +33,32 @@ public class CalculadoraDiferente {
 }
 ```
 
+---
+
+## <span style="color:red;">IMPORTANTE</span>: versões e comandos para rodar os testes
+
+Para rodar os testes, certifique-se de que o java está instalado na sua máquina utilizando comando `java --version`.
+Aqui está o resultado do meu comando:
+
+```bash
+> java --version
+openjdk 11.0.21 2023-10-17 LTS
+OpenJDK Runtime Environment Corretto-11.0.21.9.1 (build 11.0.21+9-LTS)
+OpenJDK 64-Bit Server VM Corretto-11.0.21.9.1 (build 11.0.21+9-LTS, mixed mode)
+```
+
+Todos os códigos foram desenvolvidos com essas versões.
+
+Para executar os testes, navegue até a raiz deste repositório e execute:
+
+```bash
+javac -cp lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar -d bin src/CalculadoraDiferente.java test/CalculadoraDiferenteTest.java && java -cp bin:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculadoraDiferenteTest
+```
+
+O comando acima vai compilar o código utilizando o junit-4.13.2 e o hamcrest-core-1.3 e em seguida, caso a compilação tenha sido bem sucedida, executar o código compilado.
+
+---
+
 ## Testes
 
 Para começar, criei alguns testes para cada uma das funções disponibilizadas. Eles podem ser encontrados a seguir.
@@ -52,6 +78,7 @@ public class CalculadoraDiferenteTest {
         assertEquals(1, calc.inverteNumero(1));
         assertEquals(0, calc.inverteNumero(0));
         assertEquals(21, calc.inverteNumero(1200));
+        // assertEquals(-21, calc.inverteNumero(-120000));
     }
 
     @Test
@@ -62,6 +89,9 @@ public class CalculadoraDiferenteTest {
         assertEquals(6, calc.fatorial(3));
         assertEquals(1, calc.fatorial(1));
         assertEquals(1, calc.fatorial(0));
+        assertEquals(479001600, calc.fatorial(12));
+        // assertEquals(1932053504, calc.fatorial(13)); //overflow
+        // assertEquals(1932053504, calc.fatorial(17)); //overflow
     }
 
     @Test
@@ -73,12 +103,10 @@ public class CalculadoraDiferenteTest {
         assertEquals(3, calc.somaDobro(1, 1));
         assertEquals(1, calc.somaDobro(1, 0));
         assertEquals(2, calc.somaDobro(0, 1));
-        assertEquals(10, calc.somaDobro(2, 4));
+        assertEquals(825, calc.somaDobro(25, 400));
     }
 }
 ```
-
-e os rodei, obtendo o seguinte resultado:
 
 ```bash
 JUnit version 4.13.2
@@ -123,6 +151,24 @@ Time: 0.003
 OK (3 tests)
 
 ```
+
+---
+
+## Sobre os testes escolhidos
+
+### inverteNumero
+
+Os testes da função `inverteNumero` foram escolhidos para demonstrar como o código se comporta com varios tamnhos de números, assim como numeros pequenos e até mesmo o 0 e o 1. O número 1200 foi escolhido para demonstrar a funcionalidade com números que, ao ser invertidos, resultariam em números com 0 a esquerda. O número negativo foi comentado, pois a função não está preparada para representar números negativos
+
+### Fatorial
+
+Os testes da função `fatorial` foram escolhidos para demonstrar casos variados dessa operação matemática. Com os testes, como foi dito antes, foi possível identificar e ajustar um erro no código, particularmente no resultado de `fatorial(0)`. Foi colocado um valor que retornaria um int de alto valor. As linhas comentadas são de números que começaram a gerar overflows.
+
+### SomaDobro
+
+Os testes da função `somaDobro` foram escolhidos para demonstrar possíveis falhas em números baixos, incluindo 0 e 1. Foi adicionado um valor mais alto para demonstrar sua funcionalidade em números elevados também.
+
+---
 
 ## Conclusão
 
